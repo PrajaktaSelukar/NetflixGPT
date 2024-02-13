@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { BACKGROUND_IMG } from "../utils/constants"
 import Header from "./Header"
+import { checkValidateData } from "../utils/validate";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
+
+    const name = useRef(null);
+    const email = useRef(null);
+    const password = useRef(null);
 
     const handleSignUp = () => {
         setIsSignInForm(!isSignInForm);
     };
+
+    const handleButtonClick = () => {
+        const message = checkValidateData(name.current.value, email.current.value, password.current.value);
+        setErrorMessage(message);
+    }
+
+    // Sign In / Sign Up
+
     
   return (
     <div>
@@ -18,28 +32,35 @@ const Login = () => {
                 src={ BACKGROUND_IMG }
             />
         </div>
-        <form className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
+        <form
+            onSubmit={ (e) => e.preventDefault() }
+            className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80"
+        >
             <h1 className="font-bold text-3xl py-4">
                 { isSignInForm ? "Sign In" : "Sign Up"}
             </h1>
             { !isSignInForm && 
                 <input 
+                    ref={name}
                     type="text"
                     placeholder="Name"
                     className="p-4 my-4 w-full bg-gray-700 rounded-lg"
                 /> 
             }
             <input 
+                ref={email}
                 type="text"
                 placeholder="Email Address"
                 className="p-4 my-4 w-full bg-gray-700 rounded-lg"
             />
             <input
+                ref={password}
                 type="password"
                 placeholder="Password"
                 className="p-4 my-4 w-full bg-gray-700 rounded-lg" 
             />
-            <button className="p-4 my-6 bg-red-700 rounded-lg">
+            <p className="text-red-500 font-bold text-xl">{ errorMessage }</p>
+            <button className="p-4 my-6 bg-red-700 rounded-lg" onClick={ handleButtonClick }>
                 { isSignInForm ? "Sign In" : "Sign Up"}
             </button>
 

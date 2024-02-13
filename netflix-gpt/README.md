@@ -34,3 +34,32 @@
 ### Notes
 - Try to keep App.js clean
 - Body consists of Login
+- While showing errors in Login page, you can use State variables or **useRef** Hook
+```
+const email = useRef(null);
+<input 
+  ref={email}
+  type="text"
+  placeholder="Email Address"
+  className="p-4 my-4 w-full bg-gray-700 rounded-lg"
+/>
+```
+- Fetch value from useRef using **email.current.value**
+- In Form, it tries to submit the form automatically. If we don't have onSubmit() it refreshes the page. To avoid it write e.preventDefault()
+- useRef is used to reference some field(like input)
+
+
+### Firebase configuration
+- Create a project using web
+- If you want to deploy in firebase, enable hosting.
+- You can deploy now or later. To deploy now, open a terminal window, then navigate to or create a root directory for your web app.
+- Sign in to Google
+```firebase login```
+- Initiate your project. Run this command from your app's root directory:
+```firebase init```
+- When you're ready, deploy your web app
+- Put your static files (e.g. HTML, CSS, JS) in your app's deploy directory (the default is 'public'). Then, run this command from your app's root directory:
+```firebase deploy```
+- After deploying, view your app at netflixgpt-934e4.web.app
+- Start with Authentication
+- You can add Emial/Password, Google, Microsoft, Facebook, Github logins
