@@ -53,13 +53,29 @@ const email = useRef(null);
 - Create a project using web
 - If you want to deploy in firebase, enable hosting.
 - You can deploy now or later. To deploy now, open a terminal window, then navigate to or create a root directory for your web app.
-- Sign in to Google
+- Sign in to Google with your Gmail id
 ```firebase login```
-- Initiate your project. Run this command from your app's root directory:
+- Initiate your project. Run this command from your app's root directory.
 ```firebase init```
+- **Project setup** 
+1. Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys => So that deployment is in your control.
+2. Use an existing project
+- **Hosting Setup**
+1. Keep **build** as your public directory.
+2. Configure as single-page app as **No** and Set up automatic build  deploy with Github as **No**.
 - When you're ready, deploy your web app
 - Put your static files (e.g. HTML, CSS, JS) in your app's deploy directory (the default is 'public'). Then, run this command from your app's root directory:
 ```firebase deploy```
 - After deploying, view your app at netflixgpt-934e4.web.app
 - Start with Authentication
-- You can add Emial/Password, Google, Microsoft, Facebook, Github logins
+- You can add Email/Password, Google, Microsoft, Facebook, Github logins.
+
+### Integrating auth
+```
+const auth = getAuth();
+```
+- This code is used everywhere for using Firebase. So instead of writing multiple times, write it in firebase.js and use it anywhere.
+
+### Store to keep user details
+- Once user signs in, store the user data in Redux store.
+- (npm i @reduxjs/toolkit) and (npm i react-redux) to use Redux store

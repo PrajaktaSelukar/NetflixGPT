@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import { BACKGROUND_IMG } from "../utils/constants"
 import Header from "./Header"
-import { checkValidateData } from "../utils/validate";
+import { checkSignUpValidData, checkSignInValidData } from "../utils/validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(false);
@@ -16,8 +18,39 @@ const Login = () => {
     };
 
     const handleButtonClick = () => {
-        const message = checkValidateData(name.current.value, email.current.value, password.current.value);
+        const message = !isSignInForm 
+                        ? checkSignUpValidData(name?.current?.value, email.current.value, password.current.value) 
+                        : checkSignInValidData(email.current.value, password.current.value)
         setErrorMessage(message);
+        if(message) return;
+
+        // No error
+        if(!isSignInForm) {
+            // Sign Up
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(errorCode + "-" + errorMessage);
+                });
+        } else {
+            // Sign In
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(errorCode + "-" + errorMessage);
+                });
+        }
     }
 
     // Sign In / Sign Up
