@@ -79,3 +79,12 @@ const auth = getAuth();
 ### Store to keep user details
 - Once user signs in, store the user data in Redux store.
 - (npm i @reduxjs/toolkit) and (npm i react-redux) to use Redux store
+- Instead of using dispatch in SignUp and SignIn multiple times, we will use **OnAuthStateChanged**. this API is called whenever user Signs In, Signs Up, Sign Out then authentication state changed.
+- Call this API only once when the component is rendered.
+- Use Hooks(dispatch) on top on the component.
+
+### Navigation
+- use **useNavigate** Hook.
+- Navigation can happen only in children level, not at top level.
+- We should use navigate instead of window href.
+
