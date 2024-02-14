@@ -20,10 +20,10 @@
 - Bug fixes: Sign up user display Name and profile pic update
 - Bug Fix: If user is not logged in, redirect /browse to login page
   If user is logged in, redirect /login page to /browse page
-- unsubscribed to the onAuthStateChange callback to make sure there aren't lots of event listeners attached in the browser
+- unsubscribed to the onAuthStateChange callback to make sure there aren't lots of event listeners attached in the browser whenever useEffect of Header is called. => clean the useEffect
 - Add hard-coded values to the constants file
-  -Register TMDB API and create an and get access token
-- Get data from TMDB now playing movies list API
+- Register TMDB API and create an and get access token
+- Get data from TMDB now playing movies list API and put it into redux store
 - Making custom hooks: makes the code more testable, modular, more readable, promotes separation of concerns
 - Update Store with Movies 
 - Planning for main and Secondary Container
@@ -88,3 +88,19 @@ const auth = getAuth();
 - Navigation can happen only in children level, not at top level.
 - We should use navigate instead of window href.
 
+### Bug issues resolved
+- We were facing issue when logged in it should redirect to Browse page and if not logged in it should redirect to Login page.
+- Also if not logged in, it should not able to access Browsepage and redirect to Login.
+- To fix this we need add auth to navigate according to it's status.
+- We have **onAuthStateChanged** which tells if user is logged in or not.
+- Earlier we had kept it in Body but we were not able to navigate inside it as RouterProvider should be in parent level to be able to navigate.
+- Thus we can shift onAuthStateChanged to Header as it is accessible from both Login and Body.
+- When Header component unloads, it will unsubscribe the event.
+
+### StrictMode
+- React does extra rendering for checking any inconsistency between the calls.
+```
+<React.StrictMode>
+  <App />
+</React.StrictMode>
+```
