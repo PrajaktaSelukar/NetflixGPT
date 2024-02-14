@@ -104,3 +104,8 @@ const auth = getAuth();
   <App />
 </React.StrictMode>
 ```
+
+### Integrating Trailer
+- While attaching the Iframe, convert the attributes into camelCase for React.
+- We can add trailer by using useState or using redux store. Prefer the later one.
+- To autoplay keep it mute, use "?autoplay=1&mute=1"
