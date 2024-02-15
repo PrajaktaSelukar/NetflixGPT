@@ -8,11 +8,15 @@ import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/appConfigSlice";
+import lang from "../utils/languageConstants"
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector(store => store.user);
   const dispatch = useDispatch();
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  const langKey = useSelector((store) => store.config.lang);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -42,6 +46,10 @@ const Header = () => {
     });
   };
 
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   const handleGptClick = () => {
     // Toggle GPT Search
     dispatch(toggleGptSearchView());
@@ -55,17 +63,21 @@ const Header = () => {
             src={NETFLIX_LOGO}
         />
         {user && <div className="flex p-2">
-          <select className="p-2 m-2 bg-gray-900 text-white"> 
+          {showGptSearch && <select 
+            className="p-2 m-2 bg-gray-900 text-white"
+            onChange={ handleLanguageChange }
+          > 
             { SUPPORTED_LANGUAGES.map((lang) => (
               <option key={lang.identifier} value={lang.identifier}>
                 { lang.name }
               </option>
             ))}
-          </select>
+          </select>}
           <button 
             className="py-2 px-4 mx-4 my-2 bg-purple-600 text-white rounded-lg"
             onClick={handleGptClick}
-          >GPT Search</button>
+          >{showGptSearch ? lang[langKey]["Home"] : lang[langKey]["GPT Search"]}
+          </button>
           <img 
             className="w-12 h-12 p-2 m-2"
             alt="User-icon"
@@ -74,7 +86,8 @@ const Header = () => {
           <button 
             className="font-bold text-white"
             onClick={handleSignOut}
-          >Sign Out</button>
+          >{ lang[langKey]["Sign Out"] }
+          </button>
         </div>}
     </div>
   )
