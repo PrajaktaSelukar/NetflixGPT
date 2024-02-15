@@ -1,4 +1,4 @@
-import { NETFLIX_LOGO } from "../utils/constants"
+import { NETFLIX_LOGO, SUPPORTED_LANGUAGES } from "../utils/constants"
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -41,6 +42,11 @@ const Header = () => {
     });
   };
 
+  const handleGptClick = () => {
+    // Toggle GPT Search
+    dispatch(toggleGptSearchView());
+  };
+
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
         <img 
@@ -49,6 +55,17 @@ const Header = () => {
             src={NETFLIX_LOGO}
         />
         {user && <div className="flex p-2">
+          <select className="p-2 m-2 bg-gray-900 text-white"> 
+            { SUPPORTED_LANGUAGES.map((lang) => (
+              <option key={lang.identifier} value={lang.identifier}>
+                { lang.name }
+              </option>
+            ))}
+          </select>
+          <button 
+            className="py-2 px-4 mx-4 my-2 bg-purple-600 text-white rounded-lg"
+            onClick={handleGptClick}
+          >GPT Search</button>
           <img 
             className="w-12 h-12 p-2 m-2"
             alt="User-icon"
