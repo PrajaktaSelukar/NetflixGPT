@@ -4,6 +4,8 @@ export const BACKGROUND_IMG = "https://assets.nflxext.com/ffe/siteui/vlv3/a09bb9
 
 export const USER_AVATAR = "https://occ-0-2042-3663.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABRPhDNbxfvPHVFP56kT7oI1DpyMjd14ix52RDF7o8qn9Zy8UboO5MeYaz1IeUEr1w7sih47wXzwyVWIxuNjXAcapQE4T-cU.png?r=7c7";
 
+export const MOVIE_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
 export const API_OPTIONS = {
     method: 'GET',
     headers: {
