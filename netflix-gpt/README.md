@@ -154,3 +154,10 @@ REACT_APP_OPENAI_KEY=asdfghjhgddghhgfdsghgfdsssdfggfgdfsfdfg
 - Whenever component loads, Hook is called and store is updated.
 - What happens if we go back & forth between the pages, unnecessarily API calls are made even when store already has the data.
 
+### Responsiveness
+- By Default(Mobile), it will be black
+- For smaller devices(sm)(Tablet), it will become blue
+- For medium devices(md)(Desktop), it will become green
+```
+className="bg-black sm:bg-blue-900 md:bg-green-900"
+```
