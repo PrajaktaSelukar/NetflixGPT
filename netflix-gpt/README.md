@@ -127,3 +127,14 @@ const auth = getAuth();
 - While attaching the Iframe, convert the attributes into camelCase for React.
 - We can add trailer by using useState or using redux store. Prefer the later one.
 - To autoplay keep it mute, use "?autoplay=1&mute=1"
+
+### Integrate OpenAi API
+- Create API key from platform.openai.com
+- Install openai from npm
+- After fetching result from GPT, call TMDB to get movie details for all 5 movies
+- When you call TMDB API as it's a async function, it returns 5 Promises instead of the result
+- We use **Promise.all()** to extract data when Primise is resolved
+- We get data only after all Promises are resolved
+
+### Add multiple data to the same store action
+- Send an object in the dispatch

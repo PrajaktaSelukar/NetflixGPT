@@ -13,6 +13,9 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "french", name: "French" },
 ];
 
+// export const OPEN_GPT_KEY = "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";
+export const OPEN_GPT_KEY = "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";
+
 export const API_OPTIONS = {
     method: 'GET',
     headers: {
