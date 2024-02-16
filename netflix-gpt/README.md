@@ -138,3 +138,19 @@ const auth = getAuth();
 
 ### Add multiple data to the same store action
 - Send an object in the dispatch
+
+### Hide API Keys
+- Create **.env** file to store secret keys
+```
+REACT_APP_OPENAI_KEY=asdfghjhgddghhgfdsghgfdsssdfggfgdfsfdfg
+```
+- Name should start with **REACT_APP_**
+- you can access it using **process.env.REACT_APP_OPENAI_KEY**
+- Then add this.env file to .gitignore
+
+- Also you can ask user to enter their API_Key and use GPT search
+
+### Memoization
+- Whenever component loads, Hook is called and store is updated.
+- What happens if we go back & forth between the pages, unnecessarily API calls are made even when store already has the data.
+

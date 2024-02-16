@@ -14,12 +14,12 @@ export const SUPPORTED_LANGUAGES = [
 ];
 
 // export const OPEN_GPT_KEY = "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";
-export const OPEN_GPT_KEY = "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";
+export const OPEN_GPT_KEY = process.env.REACT_APP_OPENAI_KEY;
 
 export const API_OPTIONS = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MzhkYWFmOTYwMTE3NDMxNDA2MTRiZmVlYjM4N2U0YyIsInN1YiI6IjY0NWI1YTY3NzdkMjNiMDE3MDM4YWNkZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6U7FkGDZxLj4hyqplPWkxPBFZZux4l29bRpdiIix9YE'
+      Authorization: 'Bearer '+ process.env.REACT_APP_TMDB_KEY
     }
 };
