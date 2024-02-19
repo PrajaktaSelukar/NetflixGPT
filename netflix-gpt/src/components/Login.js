@@ -116,7 +116,7 @@ const Login = () => {
             </button>
 
             <p className="py-4">
-                { isSignInForm ? "Already registered? " : "New to Netflix? "} 
+                { !isSignInForm ? "Already registered? " : "New to Netflix? "} 
                 <span onClick={ handleSignUp } className="cursor-pointer text-blue-400">
                     { isSignInForm ? "Sign Up" : "Sign In"} Now
                 </span>
